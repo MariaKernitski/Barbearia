@@ -15,14 +15,63 @@ const usuário_controller = require("./controller/usuário.js");
 app.use(express.json());
 app.use(cep_endereco);
 
-app.post("/barbearia", (req, res) => {
-    console.log(req.body);
-    res.json();
+/*
+app.post("/barbearia", cep_endereco, (req ,res) => {
+    res.json(req.body);
+})
+*/
+
+// CLIENTE
+
+app.get("/cliente", (req, res) => {
+    res.json(cliente_controller.index())
 })
 
-app.get("/barbearia", (req, res) => {
+app.get("/cliente/:id", (req, res) => {
+    res.json(cliente_controller.show(req.params.id))
+})
+
+app.post("/cliente", (req, res) => {
+    const code = cliente_controller.store(req.body)
+    res.status(code).json();
+})
+
+app.put("/cliente/:id", (req, res) => {
+    const code = cliente_controller.update(req.body, req.params.id)
+    res.status(code).json();
+})
+
+app.delete("/cliente/:id", (req, res) => {
+    cliente_controller.destroy(req.params.id)
     res.json()
 })
+
+// BARBEIRO
+
+app.get("/barbeiro", (req, res) => {
+    res.json(barbeiro_controller.index())
+})
+
+app.get("/barbeiro/:id", (req, res) => {
+    res.json(barbeiro_controller.show(req.params.id))
+})
+
+app.post("/barbeiro", (req, res) => {
+    const code = barbeiro_controller.store(req.body)
+    res.status(code).json();
+})
+
+app.put("/barbeiro/:id", (req, res) => {
+    const code = barbeiro_controller.update(req.body, req.params.id)
+    res.status(code).json();
+})
+
+app.delete("/barbeiro/:id", (req, res) => {
+    barbeiro_controller.destroy(req.params.id)
+    res.json()
+})
+
+// 
 
 //PORTA
 
