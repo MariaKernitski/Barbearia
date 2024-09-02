@@ -1,22 +1,24 @@
-let nextID = 1;
+let nextId = 1
 
-const model = (body, id = nextID++) => {
-    const telefone =  body.telefone.replaceAll("-", "")
-    .replaceAll("(", "")
-    .replaceAll(")", "")
-    .replaceAll(" ", "")
+const model = (body, id = nextId++) => {
 
-    const soNumeros = true;
+    const telefone = body.telefone
+        .replaceAll("-", "")
+        .replaceAll("(", "")
+        .replaceAll(")", "")
+        .replaceAll(" ", "")
 
-    telefone.forEach(el => {
+    let soNumeros = true
+
+    telefone.split("").forEach(el => {
         if(isNaN(Number(el))) {
-            soNumeros = false;
+            soNumeros = false
         }
     })
 
-    if(body.nome != undefined &&
+    if (body.nome != undefined &&
         body.email != undefined &&
-        body.telefone != undefined &&
+        telefone != undefined &&
         body.nome != "" &&
         body.email != "" &&
         body.email.includes("@") &&
@@ -35,4 +37,4 @@ const model = (body, id = nextID++) => {
     }
 }
 
-module.exports = model;
+module.exports = model
